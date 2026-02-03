@@ -7,6 +7,9 @@ import MongoDB from './db/mongo/db';
 
 //Routes
 import AuthRoute from './routes/auth.route';
+import UserRoute from './routes/user.route';
+import CustomerRoute from './routes/customer.route';
+import PaymentRoute from './routes/payment.route';
 
 //Establish MongoDB Connection
 MongoDB.instance.connect().then(() => {
@@ -30,6 +33,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 //Routes
 app.use("/api/v1/auth",AuthRoute.instance.router);
+app.use("/api/v1/user",UserRoute.instance.router);
+app.use("/api/v1/customer",CustomerRoute.instance.router);
+app.use("/api/v1/payment",PaymentRoute.instance.router);
 
 app.use(async (req: Request, res: Response) => {
     console.log(`Received request: ${req.method}: ${req.originalUrl}`);

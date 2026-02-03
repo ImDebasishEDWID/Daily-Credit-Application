@@ -7,7 +7,6 @@ const PaymentSchema = new mongoose.Schema<PaymentType>({
     customerId: {type: Schema.Types.ObjectId, required: true, ref: "Customer"},
     userId: {type: Schema.Types.ObjectId, required: true, ref: "User"},
     amount: {type: Number, required: true},
-    paymentMode: {type: String, required: true},
     paymentDate: {type: Date},
     note: {type: String},
     paymentType: {type: String, enum: ["credit", "debit"]},
@@ -18,3 +17,7 @@ const PaymentSchema = new mongoose.Schema<PaymentType>({
     },
     versionKey: false,  
 });
+
+const PaymentDb: PaymentModelType = mongoose.model<PaymentType>("Payment", PaymentSchema);
+
+export default PaymentDb;

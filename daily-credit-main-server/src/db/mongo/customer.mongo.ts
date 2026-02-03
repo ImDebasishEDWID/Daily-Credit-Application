@@ -11,6 +11,9 @@ const CustomerSchema = new mongoose.Schema<CustomerType>({
     netAmount: {type: Number, default: 0},
     totalCredit: {type: Number, default: 0},
     totalDebit: {type: Number, default: 0},
+    lastPaymentDate: {type: Date,default: null},
+    lastPaymentAmount: {type: Number,default:null},
+    lastPaymentType: {type: String, enum: ["credit", "debit",null],default:null},
     isDelete: {type: Boolean, default: false},
     userId: {type: Schema.Types.ObjectId, required: true, ref: "User"},
 },{

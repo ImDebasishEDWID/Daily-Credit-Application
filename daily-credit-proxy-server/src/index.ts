@@ -114,10 +114,10 @@ const quotationServer = createProxyMiddleware<Request, Response>({
 
 app.use("/api/v1/auth", AuthSecurity.instance.validateAppId.bind(AuthSecurity.instance), authServer);
 app.use("/api/v1/user", AuthSecurity.instance.validateToken.bind(AuthSecurity.instance), userServer);
-// app.use("/api/v1/customer", AuthSecurity.instance.validateToken.bind(AuthSecurity.instance), customerServer);
-// app.use("/api/v1/payment", AuthSecurity.instance.validateToken.bind(AuthSecurity.instance), paymentServer);
-// app.use("/api/v1/bill", AuthSecurity.instance.validateToken.bind(AuthSecurity.instance), billServer);
-// app.use("/api/v1/quotation", AuthSecurity.instance.validateToken.bind(AuthSecurity.instance), quotationServer);
+app.use("/api/v1/customer", AuthSecurity.instance.validateToken.bind(AuthSecurity.instance), customerServer);
+app.use("/api/v1/payment", AuthSecurity.instance.validateToken.bind(AuthSecurity.instance), paymentServer);
+app.use("/api/v1/bill", AuthSecurity.instance.validateToken.bind(AuthSecurity.instance), billServer);
+app.use("/api/v1/quotation", AuthSecurity.instance.validateToken.bind(AuthSecurity.instance), quotationServer);
 
 //unhandled routes
 

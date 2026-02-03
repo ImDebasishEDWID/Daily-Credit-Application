@@ -12,6 +12,8 @@ import RedisKeys from "../../db/redis/keys.redis";
 import { JwtPayload } from "../../types/jwt.type";
 import UUIDModule from "../../modules/uuid.modules";
 import OTPService from "../../service/otp.service";
+import CustomerDb from "../../db/mongo/customer.mongo";
+import { create } from "domain";
 
 
 export default class AuthController {
@@ -172,14 +174,20 @@ export default class AuthController {
 
         res.setHeader("Authorization", `Bearer ${jwtToken}`);
 
+        //customers to send to the frontend:
+        const customers = await CustomerDb.find({userId: userDetails._id}).sort({lastPaymentDate: -1}).select("name lastPaymentDate lastPaymentAmount lastPaymentType").lean();
+
         const responseData: ResponseType = {
             status: ResponseStatus.SUCCESS,
             message: "Auto login successful",
-            data: <UserType>{
+            data:{
                 userId: userDetails._id,
                 mobile: userDetails.mobile,
                 hasBusiness: userDetails.hasBusiness,
-                //Remining data will come after building all the api's
+                totalCustomers: customers.length,
+                receivedAmount: userDetails.receivedAmount,
+                paidAmount: userDetails.paidAmount,
+                customers: customers
             },
         };
 

@@ -9,6 +9,9 @@ export type CustomerType = {
     netAmount?: number;
     totalCredit?: number;
     totalDebit?: number;
+    lastPaymentDate?: Date;
+    lastPaymentAmount?: number;
+    lastPaymentType?: "credit" | "debit";
     isDelete?: boolean;
     userId?: Schema.Types.ObjectId;
     createdAt?: Date;
